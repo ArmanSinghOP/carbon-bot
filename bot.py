@@ -21,7 +21,7 @@ fp = p.readlines()
 @bot.event
 async def on_ready():
     #setting Playing status
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name=" on TWO NOOB GAMERZ!"))
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name="on TWO NOOB GAMERZ!"))
     print("Bot is Ready")
 
 @bot.command()       #test working Status
