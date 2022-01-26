@@ -6,8 +6,10 @@ from discord.ext import commands
 import asyncio
 import random
 import datetime
-
 from discord.ext.commands.bot import Bot
+
+intents = discord.Intents.default()
+intents.members= True
 
 bot = commands.Bot(command_prefix=".")
 bot.remove_command("help")
@@ -15,15 +17,19 @@ bot.remove_command("help")
 f = open("rules.txt","r")
 rules = f.readlines()
 
-p = open("fanpass.txt","r")
-fp = p.readlines()
 
 @bot.event
 async def on_ready():
     #setting Playing status
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name="on TWO NOOB GAMERZ!"))
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name=" on TWO NOOB GAMERZ!"))
     print("Bot is Ready")
 
+@bot.event
+async def on_member_join(member):
+    guild = bot.get_guild(719231017772384296)
+    channel = guild.get_channel(719596350089723915)
+    await channel.send(f'Welcome to the server {member.mention}!:partying_face:')
+    
 @bot.command()       #test working Status
 async def test(ctx):
     await ctx.send("Bot is Working Fine!")
@@ -32,10 +38,6 @@ async def test(ctx):
 @commands.has_role("★━━━━━━✧𒁷⏤͟͟͞✧〢OWNER✧━━━━━━★")
 async def pingeveryone(ctx):
     await ctx.send("@everyone " + ctx.author.mention + " pinged!")
-
-@bot.command()
-async def weekly(ctx):  #weekly Membership Status For Winners
-    await ctx.send("`It Takes 2-3 Weeks For The Weekly Membership to Come!` \n **Currently Weekly Memberships of Tournaments won till Sep 7th have been sent**")
 
 @bot.command(aliases=['rules'])        #rules for Server 
 async def rule(ctx,*,number):
@@ -118,7 +120,7 @@ async def socials(ctx):
 @bot.command()
 async def help(ctx):           #help
     embed = discord.Embed(title = "Help Page" , description = f"My prefix For the server is `.`" , color = ctx.author.color)
-    embed.add_field(name = "💬**General Commands**", value = "`Socials`,`youtube`,`instagram`,`weekly`,`rule`" , inline= False )
+    embed.add_field(name = "💬**General Commands**", value = "`Socials`,`youtube`,`instagram`,`rule`" , inline= False )
     embed.add_field(name = "🛠️**Moderation Commands**", value = "`ban`,`unban`,`kick`,`mute`,`unmute`,`pingeveryone`,`clear`" , inline= False)
     embed.add_field(name = "🎭Miscellaneous", value = "`about`,`test`")
     embed.set_thumbnail(url = "https://cdn.discordapp.com/attachments/878177140439388170/880711607557169202/Free_Sample_By_Wix.jpg")
@@ -189,5 +191,16 @@ async def guildtng(ctx):
     embed.add_field(name="Manged By", value="<@719230548517847091> DM Him For Inquiring anything more about guild or about recruitment", inline=True)
     embed.set_footer(text="Join For Booyah!", icon_url="https://cdn.discordapp.com/attachments/878177140439388170/881792390149578752/1630306046446.jpg")
     await ctx.send(embed=embed)
+    
+@bot.command(aliases=["tournament"])
+async def t(ctx,*,ch):
+    if ch=="fp" or ch=="fanpass":
+        await ctx.send("Here are the links for the Fan Pass tournament of this week!\nHope You Consider playing in the tournament!\nhttps://bit.ly/fplinkstng")
+    elif ch=="free":
+        await ctx.send("Links Will be available soon!")
+    else:
+        await ctx.send("Please put a valid command `.t <fp/fanpass/free>`")
+
+
 
 bot.run("Nzc0MTcxNjc1NjE2MDgzOTY5.X6T5jg.9_jbCFD9YfuNP6tMednaYf6Na_w")
