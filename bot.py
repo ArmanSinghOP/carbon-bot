@@ -8,10 +8,10 @@ import random
 import datetime
 from discord.ext.commands.bot import Bot
 
-intents = discord.Intents.default()
+intents = discord.Intents.all()
 intents.members= True
 
-bot = commands.Bot(command_prefix=".")
+bot = commands.Bot(command_prefix=".", intents=intents)
 bot.remove_command("help")
 
 f = open("rules.txt","r")
