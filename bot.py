@@ -1,3 +1,4 @@
+
 from os import name
 import discord
 from discord import user
@@ -7,6 +8,7 @@ import asyncio
 import random
 import datetime
 from discord.ext.commands.bot import Bot
+
 
 intents = discord.Intents.all()
 intents.members= True
@@ -28,7 +30,10 @@ async def on_ready():
 async def on_member_join(member):
     guild = bot.get_guild(719231017772384296)
     channel = guild.get_channel(719596350089723915)
-    await channel.send(f'Welcome to the server {member.mention}!:partying_face:')
+    embed = discord.Embed(title="Welcome to TWO NOOB GAMERZ!", description=f"{member.mention} Just Joined the servers!",color=0xFF5733) 
+    embed.add_field(name="Joined at", value=f"{member.joined_at}!", inline=False)
+    embed.add_field(name="Created at", value=f"{member.created_at}")
+    await channel.send(embed=embed)
     
 @bot.command()       #test working Status
 async def test(ctx):
