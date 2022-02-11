@@ -166,7 +166,7 @@ async def gstart(ctx, mins : int, * , prize: str):
 
     await ctx.send(f"Congratulations! {winner.mention} won {prize}")
 
-@bot.command(aliases=[""])
+@bot.command()
 async def guild(ctx):            #ff guild
     embed = discord.Embed(title="Guild Info", description="Here's the list of our official Guilds", color=ctx.author.color) 
     embed.add_field(name="ՄɴɪᴛᴇᴅᯓՏᴏᴜʟs", value="Type `.guildus` For More Info", inline=False)
